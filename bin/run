@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -eu
+
+W=/workspace/
+# Create a container
+C=$(docker container create --rm -w $W ghcr.io/codewars/factor:latest factor -run=kata.tests)
+
+# Copy files from the current directory
+docker container cp examples/${1:-passing}/. $C:$W
+
+# Run tests
+docker container start --attach $C
