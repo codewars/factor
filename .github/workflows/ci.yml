@@ -29,7 +29,7 @@ jobs:
         run: bin/run passing
 
       - name: Create Postbuild Info
-        run: bin/info
+        run: bin/info >> $GITHUB_STEP_SUMMARY
 
       - name: Report Image Size
         run: |

@@ -2,17 +2,9 @@
 USING: kernel io compiler.errors tools.errors assocs namespaces source-files.errors accessors sequences prettyprint sequences.extras sets ;
 IN: postbuild
 
-: report-linkage-errors ( -- )
-  linkage-errors get values [ error>> no-such-library? ] [ error>> name>> ] filter-map members ...
-  ! "==== COMPILER" print
-  ! compiler-errors get values errors.
-  ! "==== ALL" print
-  ! all-errors get errors.
-;
-
 : report-missing-libraries ( -- )
   linkage-errors get values [ error>> no-such-library? ] [ error>> name>> ] filter-map members
-  [ "Missing libraries:" print
+  [ "## Missing libraries:" print
     [ print ] each
   ] unless-empty
 ;
