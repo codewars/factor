@@ -1,5 +1,5 @@
 ! copyright 2024 nomennescio
-USING: kernel io compiler.errors tools.errors assocs namespaces source-files.errors accessors sequences prettyprint sequences.extras sets ;
+USING: accessors assocs compiler.errors io kernel namespaces prettyprint sequences sequences.extras sets source-files.errors tools.errors ;
 IN: postbuild
 
 : report-missing-libraries ( -- )
