@@ -28,6 +28,9 @@ jobs:
       - name: Run Passing Example
         run: bin/run passing
 
+      - name: Create Postbuild Info
+        run: bin/info
+
       - name: Report Image Size
         run: |
           echo "## Image Size" >> $GITHUB_STEP_SUMMARY
