@@ -1,5 +1,5 @@
 ! copyright 2024 nomennescio
-USING: kernel
+USING: kernel ;
 IN: postbuild
 
 : run ( -- )
