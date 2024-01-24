@@ -13,6 +13,11 @@ RUN set -ex; \
     apt-get install -y --no-install-recommends \
         wget \
         ca-certificates \
+        libssl-dev \
+        libsqlite3-dev \
+        zlib1g-dev \
+        libpq-dev \
+        libsnappy-dev \
     ; \
     rm -rf /var/lib/apt/lists/*;
 
