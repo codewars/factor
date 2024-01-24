@@ -4,7 +4,7 @@ IN: postbuild
 
 : report-missing-libraries ( -- )
   linkage-errors get values [ error>> no-such-library? ] [ error>> name>> ] filter-map members
-  [ "## Missing libraries:" print
+  [ "## Missing libraries" print
     [ print ] each
   ] unless-empty
 ;
