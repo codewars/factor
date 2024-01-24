@@ -3,8 +3,6 @@ USING: kernel io compiler.errors tools.errors assocs namespaces source-files.err
 IN: postbuild
 
 : report-linkage-errors ( -- )
-  ! all-errors get values errors.
-  "==== LINKAGE" print
   linkage-errors get values [ error>> no-such-library? ] [ error>> name>> ] filter-map members ...
   ! "==== COMPILER" print
   ! compiler-errors get values errors.
@@ -12,8 +10,15 @@ IN: postbuild
   ! all-errors get errors.
 ;
 
+: report-missing-libraries ( -- )
+  linkage-errors get values [ error>> no-such-library? ] [ error>> name>> ] filter-map members
+  [ "Missing libraries:" print
+    [ print ] each
+  ] unless-empty
+;
+
 : run ( -- )
-  report-linkage-errors
+  report-missing-libraries
 ;
 
 MAIN: run
