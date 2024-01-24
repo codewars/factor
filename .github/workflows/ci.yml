@@ -9,7 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # if: ${{ github.repository == 'codewars/factor' }}
     steps:
       - uses: actions/checkout@v4
       - uses: docker/setup-buildx-action@v2
@@ -28,7 +27,7 @@ jobs:
       - name: Run Passing Example
         run: bin/run passing
 
-      - name: Create Postbuild Info
+      - name: Report Postbuild Info
         run: bin/info >> $GITHUB_STEP_SUMMARY
 
       - name: Report Image Size
