@@ -18,6 +18,7 @@ RUN set -ex; \
         zlib1g-dev \
         libpq-dev \
         libsnappy-dev \
+        libzstd-dev \
     ; \
     rm -rf /var/lib/apt/lists/*;
 
@@ -56,7 +57,7 @@ RUN set -ex; \
         ./extra/talks \
     ; \
 # reimage factor.image
-    ./factor -run=codewars.imager;
+    ./factor -factor-version="$FACTOR_VERSION" -testest-version="$TESTEST_VERSION" -run=codewars.imager;
 
 ENV PATH=/opt/factor:$PATH \
     FACTOR_ROOTS=/workspace
