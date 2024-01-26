@@ -1,6 +1,6 @@
 # Factor
 
-Container image for Factor used by CodeRunner.
+Container image for Factor with Testest unit test library, used by CodeRunner.
 
 ## Examples
 
