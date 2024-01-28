@@ -25,20 +25,20 @@ RUN set -ex; \
 # Add the test framework
 RUN set -ex; \
     mkdir -p /opt/factor/work; \
-    mkdir -p /opt/factor/pre; \
     mkdir -p /tmp/testest; \
     wget -q -O - https://github.com/codewars/testest/archive/refs/tags/v${TESTEST_VERSION}.tar.gz | tar xz -C /tmp/testest --strip-components=1; \
     cd /tmp/testest; \
     mv tools /opt/factor/work; \
-    mv codewars /opt/factor/work; \
-    mv math /opt/factor/pre; \
+    mv math /opt/factor/work; \
     rm -rf /tmp/testest;
+
+ADD src/imager.factor /tmp/imager.factor
 
 # Install Factor
 RUN set -ex; \
     cd /opt; \
     wget -q -O - https://downloads.factorcode.org/releases/${FACTOR_VERSION}/factor-linux-x86-64-${FACTOR_VERSION}.tar.gz | tar xzf -; \
-# To minimize the size, remove misc/ (editor support, icons), some of extra/ (extra libs and apps)
+# To minimize the size, remove misc/ (editor support, icons), some of extra/ (extra libs, apps and demos)
     cd /opt/factor; \
     rm -rf \
         ./misc \
@@ -54,10 +54,38 @@ RUN set -ex; \
         ./extra/project-euler \
         ./extra/rosetta-code \
         ./extra/audio/engine/test \
-        ./extra/talks \
+        ./extra/cuda/gl \
+        ./extra/fluids \
+        ./extra/game \
+        ./extra/gml \
+        ./extra/mason/test \
+        ./extra/model-viewer \
+        ./extra/papier \
+        ./extra/taxes/usa/mn \
+        ./extra/webapps \
+        ./extra/chipmunk/demo \
+        ./extra/euler \
+        ./extra/gamelib \
+        ./extra/opengl \
+        ./extra/terrain \
+        ./extra/L-system \
+        ./extra/boids \
+        ./extra/bubble-chamber \
+        ./extra/golden-section \
+        ./extra/gtk-samples \
+        ./extra/jamshred \
+        ./extra/math/splines/testing \
+        ./extra/math/splines/viewer \
+        ./extra/maze \
+        ./extra/nehe \
+        ./extra/processing \
+        ./extra/spheres \
+        ./extra/trails \
+        ./extra/roms \
     ; \
 # reimage factor.image
-    ./factor -factor-version="$FACTOR_VERSION" -testest-version="$TESTEST_VERSION" -run=codewars.imager;
+  ./factor -factor-version="$FACTOR_VERSION" -testest-version="$TESTEST_VERSION" /tmp/imager.factor; \
+  rm /tmp/imager.factor;
 
 ENV PATH=/opt/factor:$PATH \
     FACTOR_ROOTS=/workspace
